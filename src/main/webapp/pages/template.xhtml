@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<h:html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:prime="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Projeto Zero 1.0</title>
+	<h:outputStylesheet library="estilos" name="projetoZero.css" />
+</h:head>
+<h:body>
+	<f:loadBundle basename="messages_pt" var="msg" />
+	
+	<prime:ajaxStatus onstart="statusAjaxDialog.show();"
+		onsuccess="statusAjaxDialog.hide();" />
+		
+	<prime:dialog modal="true" widgetVar="statusAjaxDialog" header="#{msg.label_aguarde}"
+		draggable="false" closable="false">
+		<h:graphicImage value="/resources/imagens/ajaxloadingbar.gif" />
+	</prime:dialog>
+	
+	<ui:insert name="cabecalho" />
+	<ui:insert name="corpo" />
+</h:body>
+</h:html>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources xmlns="http://www.jboss.org/ironjacamar/schema">
+	<datasource jndi-name="java:jboss/datasources/ProjetoZeroDS"
+		pool-name="projetozero-ds-pool" enabled="true" use-java-context="true">
+		<connection-url>jdbc:mysql://localhost:3306/teste</connection-url>
+		<driver>mysql</driver>
+		<security>
+			<user-name>projetoZero</user-name>
+			<password>projetoZero</password>
+		</security>
+		<pool>
+			<min-pool-size>10</min-pool-size>
+			<max-pool-size>100</max-pool-size>
+			<prefill>true</prefill>
+		</pool>
+	</datasource>
+</datasources>

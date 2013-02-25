@@ -5,8 +5,8 @@
 		<connection-url>jdbc:mysql://localhost:3306/teste</connection-url>
 		<driver>mysql</driver>
 		<security>
-			<user-name>projetoZero</user-name>
-			<password>projetoZero</password>
+			<user-name>projetozero</user-name>
+			<password>projetozero</password>
 		</security>
 		<pool>
 			<min-pool-size>10</min-pool-size>

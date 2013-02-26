@@ -3,7 +3,6 @@ package br.com.ranyel.projetozero.domain;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +14,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.ranyel.projetozero.domain.iface.BaseEntity;
 
@@ -32,23 +33,23 @@ public class Usuario implements BaseEntity<Long> {
 	private Long id;
 
 	@Column
-	@NotNull(message = "O campo nome não pode estar vazio!")
+	@NotEmpty
 	private String nome;
 
 	@Column
-	@NotNull(message = "O campo cpf não pode estar vazio!")
+	@NotEmpty
 	private String cpf;
 
 	@Column
-	@NotNull(message = "O campo senha não pode estar vazio!")
+	@NotEmpty
 	private String senha;
 
 	@Column
-	@NotNull(message = "O campo data de nascimento não pode estar vazio!")
+	@NotNull
 	private Date dataNascimento;
 
 	@Column
-	@NotNull(message = "O campo telefone não pode estar vazio!")
+	@NotEmpty
 	private String numeroTelefone;
 
 	@JoinTable(name = "TB_PERFIL_USUARIO", 

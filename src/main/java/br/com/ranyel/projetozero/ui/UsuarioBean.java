@@ -71,7 +71,6 @@ public class UsuarioBean implements Serializable {
 	 */
 	public void salvarUsuario() {
 		try {
-			usuario.setPerfilList(getPerfis().getTarget());
 			usuarioService.salvar(usuario);
 			if(usuario.getId() != null) {
 				FacesUtil.addInfoMessage("Alteração realizada com sucesso");
@@ -158,6 +157,9 @@ public class UsuarioBean implements Serializable {
 		this.usuarioList = usuarioList;
 	}
 
+	/**
+	 * @return retorna um objeto DualListModel preenchido para ser utilizado com o componente picklist do primefaces.
+	 */
 	public DualListModel<Perfil> getPerfis() {
 		if (perfis == null) {
 			List<Perfil> source = getPerfisDisponiveis();
@@ -176,8 +178,14 @@ public class UsuarioBean implements Serializable {
 		return perfis;
 	}
 
+	/**
+	 * @param perfis - objeto DualListModel utilizado pelo componente picklist do primefaces.
+	 */
 	public void setPerfis(DualListModel<Perfil> perfis) {
 		this.perfis = perfis;
+		if(perfis != null && !perfis.getTarget().isEmpty()){
+			usuario.setPerfilList(perfis.getTarget());
+		}
 	}
 
 	public Conversation getConversation() {

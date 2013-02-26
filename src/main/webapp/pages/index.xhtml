@@ -10,37 +10,59 @@
 	<ui:define name="cabecalho" />
 	<ui:define name="corpo">
 		<h:form id="corpoForm">
-			<prime:growl id="globalMsg"/>
+			<prime:growl id="globalMsg" globalOnly="true" />
 			<prime:panel header="#{msg.label_usuarios}" id="usuarios">
-				<prime:panel header="#{msg.label_cadastrar_usuario}" id="usuariosCadastro">
+				<prime:panel header="#{msg.label_cadastrar_usuario}"
+					id="usuariosCadastro">
 					<h:panelGrid columns="2" id="campos">
 						<h:outputLabel value="#{msg.label_nome}" />
-						<prime:inputText value="#{usuarioBean.usuario.nome}" />
+						<h:panelGrid columns="2">
+							<prime:inputText id="nome" value="#{usuarioBean.usuario.nome}" />
+							<prime:message for="nome" />
+						</h:panelGrid>
 
 						<h:outputLabel value="#{msg.label_cpf}" />
-						<prime:inputMask value="#{usuarioBean.usuario.cpf}"
-							mask="999.999.999-99" />
+						<h:panelGrid columns="2">
+							<prime:inputMask id="cpf" value="#{usuarioBean.usuario.cpf}"
+								mask="999.999.999-99" />
+							<prime:message for="cpf" />
+						</h:panelGrid>
 
 						<h:outputLabel value="#{msg.label_senha}" />
-						<prime:password value="#{usuarioBean.usuario.senha}"
-							feedback="true" promptLabel="#{msg.label_digite_senha}" weakLabel="#{msg.label_fraca}"
-							goodLabel="#{msg.label_boa}" strongLabel="#{msg.label_forte}" />
+						<h:panelGrid columns="2">
+							<prime:password value="#{usuarioBean.usuario.senha}" id="senha"
+								feedback="true" promptLabel="#{msg.label_digite_senha}"
+								weakLabel="#{msg.label_fraca}" goodLabel="#{msg.label_boa}"
+								strongLabel="#{msg.label_forte}" />
+							<prime:message for="senha" />
+						</h:panelGrid>
 
 						<h:outputLabel value="#{msg.label_data_nascimento}" />
-						<prime:calendar value="#{usuarioBean.usuario.dataNascimento}"
-							navigator="true" showOtherMonths="true" showEffect="fade"
-							hideEffect="fade" required="true" />
+						<h:panelGrid columns="2">
+							<prime:calendar value="#{usuarioBean.usuario.dataNascimento}"
+								id="data" navigator="true" showOtherMonths="true" showButtonPanel="true"
+								showEffect="fade" hideEffect="fade" yearRange="c-50:c+10" 
+								locale="pt_BR" pattern="dd/MM/yyyy" readonlyInput="true" />
+							<prime:message for="data" />
+						</h:panelGrid>
 
 						<h:outputLabel value="#{msg.label_telefone}" />
-						<prime:inputMask value="#{usuarioBean.usuario.numeroTelefone}"
-							mask="(99) 9999-9999" />
+						<h:panelGrid columns="2">
+							<prime:inputMask value="#{usuarioBean.usuario.numeroTelefone}"
+								id="telefone" mask="(99) 9999-9999" />
+							<prime:message for="telefone" />
+						</h:panelGrid>
+
 						<h:outputLabel value="#{msg.label_perfis}" />
-						<prime:pickList value="#{usuarioBean.perfis}" var="perfil"
-							effect="fade" effectSpeed="fast" itemLabel="#{perfil.nome}"
-							itemValue="#{perfil}" converter="perfilConverter">
-							<f:facet name="sourceCaption">#{msg.label_disponíveis}</f:facet>
-							<f:facet name="targetCaption">#{msg.label_selecionados}</f:facet>
-						</prime:pickList>
+						<h:panelGrid columns="2">
+							<prime:pickList value="#{usuarioBean.perfis}" var="perfil" id="perfis"
+								effect="fade" effectSpeed="fast" itemLabel="#{perfil.nome}"
+								itemValue="#{perfil}" converter="perfilConverter">
+								<f:facet name="sourceCaption">#{msg.label_disponíveis}</f:facet>
+								<f:facet name="targetCaption">#{msg.label_selecionados}</f:facet>
+							</prime:pickList>
+							<prime:message for="perfis" />
+						</h:panelGrid>
 					</h:panelGrid>
 					<prime:spacer height="10px" />
 					<h:panelGrid>
@@ -51,9 +73,9 @@
 					</h:panelGrid>
 				</prime:panel>
 				<prime:spacer height="8px" />
-				<prime:panel header="#{msg.label_pesquisar_usuarios}" id="usuariosPesquisa">
-					<prime:dataTable value="#{usuarioBean.usuarioList}"
-						id="usuariosTabela" paginator="true"
+				<prime:panel header="#{msg.label_pesquisar_usuarios}"
+					id="usuariosPesquisa">
+					<prime:dataTable value="#{usuarioBean.usuarioList}" id="usuariosTabela" paginator="true"
 						emptyMessage="#{msg.msg_nao_ha_registros}" var="usuario">
 						<prime:column>
 							<f:facet name="header">
@@ -85,7 +107,7 @@
 							<h:commandLink action="#{usuarioBean.editarUsuario(usuario)}">
 								<h:graphicImage value="/resources/imagens/ico16_alterar.gif" />
 								<f:param name="cid" value="#{usuarioBean.conversation.id}" />
-								<f:ajax event="action" execute="@this" render=":corpoForm:campos"/>
+								<f:ajax event="action" execute="@this" render=":corpoForm:campos" />
 							</h:commandLink>
 						</prime:column>
 
@@ -96,15 +118,14 @@
 							<h:commandLink action="#{usuarioBean.excluirUsuario(usuario)}">
 								<h:graphicImage value="/resources/imagens/ico16_excluir.gif" />
 								<f:param name="cid" value="#{usuarioBean.conversation.id}" />
-								<f:ajax event="action" execute="@this" render=":corpoForm:globalMsg usuariosTabela"/>
+								<f:ajax event="action" execute="@this" render=":corpoForm:globalMsg usuariosTabela" />
 							</h:commandLink>
 						</prime:column>
 					</prime:dataTable>
 					<prime:spacer height="10px" />
 					<h:panelGrid>
 						<prime:commandButton action="#{usuarioBean.pesquisarUsuario}"
-							value="#{msg.comando_pesquisar}" immediate="true"
-							update="usuariosPesquisa">
+							value="#{msg.comando_pesquisar}" immediate="true" update="usuariosPesquisa">
 							<f:param name="cid" value="#{usuarioBean.conversation.id}" />
 						</prime:commandButton>
 					</h:panelGrid>

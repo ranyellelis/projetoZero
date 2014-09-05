@@ -7,6 +7,8 @@
 	<persistence-unit name="ProjetoZeroPU" transaction-type="JTA">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>java:jboss/datasources/ProjetoZeroDS</jta-data-source>
+		<class>br.com.ranyel.projetozero.domain.Perfil</class>
+		<class>br.com.ranyel.projetozero.domain.Usuario</class>
 		<!-- Properties for Hibernate -->
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="update" />

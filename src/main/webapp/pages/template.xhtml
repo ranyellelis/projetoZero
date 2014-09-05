@@ -9,21 +9,24 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>Projeto Zero 1.0</title>
-		<h:outputStylesheet name="projetoZero.css" library="estilos"/>
-	    <h:outputScript name="locales-primefaces.js" library="js" />   
+	<h:outputStylesheet name="projetoZero.css" library="estilos" />
+	<h:outputScript name="locales-primefaces.js" library="js" />
 </h:head>
 <h:body>
 	<f:loadBundle basename="messages_pt" var="msg" />
-	
+	<prime:growl id="globalMsg" globalOnly="true" />
+
 	<prime:ajaxStatus onstart="statusAjaxDialog.show();"
 		onsuccess="statusAjaxDialog.hide();" />
-		
-	<prime:dialog modal="true" widgetVar="statusAjaxDialog" header="#{msg.label_aguarde}"
-		draggable="false" closable="false">
+
+	<prime:dialog modal="true" widgetVar="statusAjaxDialog"
+		header="#{msg.label_aguarde}" draggable="false" closable="false">
 		<h:graphicImage value="/resources/imagens/ajaxloadingbar.gif" />
 	</prime:dialog>
-	
+
 	<ui:insert name="cabecalho" />
-	<ui:insert name="corpo" />
+	<h:form id="corpoForm">
+		<ui:insert name="corpo" />
+	</h:form>
 </h:body>
 </h:html>
